@@ -8,7 +8,7 @@ public class GraphSearch {
 
     public static Action[][] search(State initialState, Frontier frontier)
     {
-        boolean outputFixedSolution = true;
+        boolean outputFixedSolution = false;
 
         if (outputFixedSolution) {
             //Part 1:
@@ -43,13 +43,35 @@ public class GraphSearch {
             HashSet<State> explored = new HashSet<>();
 
             while (true) {
+                // If the frontier is empty return failure
+                if (frontier.isEmpty()) {
+                    return null;
+                }
+
+                // Choose a leaf node and remove it from the frontier
+                State cur = frontier.pop();
+
+                // If it is a goal state return it
+                if (cur.isGoalState()) {
+                    return cur.extractPlan();
+                }
+
+                // Add the current state to the explored set
+                explored.add(cur);
+
+                // Expand the current state
+                ArrayList<State> next_states = cur.getExpandedStates();
+                for (State new_state : next_states) {
+                    // If the new state is not in the explored set or the frontier set, it to the frontier
+                    if (!explored.contains(new_state) && !frontier.contains(new_state)) {
+                        frontier.add(new_state);
+                    }
+                }
 
                 //Print a status message every 10000 iteration
                 if (++iterations % 10000 == 0) {
                     printSearchStatus(explored, frontier);
                 }
-
-                //Your code here...
             }
         }
     }
