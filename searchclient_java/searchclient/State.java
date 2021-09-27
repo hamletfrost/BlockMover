@@ -220,6 +220,23 @@ public class State
                 destinationCol = agentCol + action.agentColDelta;
                 return this.cellIsFree(destinationRow, destinationCol);
 
+	    case Push:
+		aDestinationRow = agentRow + action.agentRowDelta;
+		aDestinationCol = agentCol + action.agentColDelta;
+		bDestinationRow = boxRow + action.boxRowDelta;
+		bDestinationCol = boxCol + action.boxColDelta;
+		return (this.cellIsFree(bDestinationRow, bDestinationCol)
+				&& aDestinationRow == boxRow
+				&& aDestinationCol == boxCol);
+
+	    case Pull:
+		aDestinationRow = agentRow + action.agentRowDelta;
+		aDestinationCol = agentCol + action.agentColDelta;
+		bDestinationRow = boxRow + action.boxRowDelta;
+		bDestinationCol = boxCol + action.boxColDelta;
+		return (this.cellIsFree(aDestinationRow, aDestinationCol)
+				&& bDestinationRow == agentRow
+				&& bDestinationCol == agentCol);
         }
 
         // Unreachable:
