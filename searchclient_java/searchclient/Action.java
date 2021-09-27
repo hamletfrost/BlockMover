@@ -40,9 +40,9 @@ public enum Action
     PushWW("Push(W,W)", ActionType.Push, 0, -1, 0, -1),
     PushWN("Push(W,N)", ActionType.Push, 0, -1, -1, 0),
     PushWS("Push(W,S)", ActionType.Push, 0, -1, 1, 0),
-    PushWW("Push(E,E)", ActionType.Push, 0, 1, 0, 1),
-    PushWN("Push(E,N)", ActionType.Push, 0, 1, -1, 0),
-    PushWS("Push(E,S)", ActionType.Push, 0, 1, 1, 0),
+    PushEE("Push(E,E)", ActionType.Push, 0, 1, 0, 1),
+    PushEN("Push(E,N)", ActionType.Push, 0, 1, -1, 0),
+    PushES("Push(E,S)", ActionType.Push, 0, 1, 1, 0),
 
     PullNN("Pull(N,N)", ActionType.Pull, -1, 0, -1, 0),
     PullNW("Pull(N,W)", ActionType.Pull, -1, 0, 0, -1),
@@ -53,9 +53,9 @@ public enum Action
     PullWW("Pull(W,W)", ActionType.Pull, 0, -1, 0, -1),
     PullWN("Pull(W,N)", ActionType.Pull, 0, -1, -1, 0),
     PullWS("Pull(W,S)", ActionType.Pull, 0, -1, 1, 0),
-    PullWW("Pull(E,E)", ActionType.Pull, 0, 1, 0, 1),
-    PullWN("Pull(E,N)", ActionType.Pull, 0, 1, -1, 0),
-    PullWS("Pull(E,S)", ActionType.Pull, 0, 1, 1, 0),
+    PullEE("Pull(E,E)", ActionType.Pull, 0, 1, 0, 1),
+    PullEN("Pull(E,N)", ActionType.Pull, 0, 1, -1, 0),
+    PullES("Pull(E,S)", ActionType.Pull, 0, 1, 1, 0);
 
     public final String name;
     public final ActionType type;
