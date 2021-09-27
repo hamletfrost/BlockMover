@@ -4,7 +4,8 @@ enum ActionType
 {
     NoOp,
     Move,
-    Push
+    Push,
+    Pull
 }
 
 public enum Action
@@ -42,6 +43,19 @@ public enum Action
     PushWW("Push(E,E)", ActionType.Push, 0, 1, 0, 1),
     PushWN("Push(E,N)", ActionType.Push, 0, 1, -1, 0),
     PushWS("Push(E,S)", ActionType.Push, 0, 1, 1, 0),
+
+    PullNN("Pull(N,N)", ActionType.Pull, -1, 0, -1, 0),
+    PullNW("Pull(N,W)", ActionType.Pull, -1, 0, 0, -1),
+    PullNE("Pull(N,E)", ActionType.Pull, -1, 0, 0, 1),
+    PullSS("Pull(S,S)", ActionType.Pull, 1, 0, 1, 0),
+    PullSW("Pull(S,W)", ActionType.Pull, 1, 0, 0, -1),
+    PullSE("Pull(S,E)", ActionType.Pull, 1, 0, 0, 1),
+    PullWW("Pull(W,W)", ActionType.Pull, 0, -1, 0, -1),
+    PullWN("Pull(W,N)", ActionType.Pull, 0, -1, -1, 0),
+    PullWS("Pull(W,S)", ActionType.Pull, 0, -1, 1, 0),
+    PullWW("Pull(E,E)", ActionType.Pull, 0, 1, 0, 1),
+    PullWN("Pull(E,N)", ActionType.Pull, 0, 1, -1, 0),
+    PullWS("Pull(E,S)", ActionType.Pull, 0, 1, 1, 0),
 
     public final String name;
     public final ActionType type;
