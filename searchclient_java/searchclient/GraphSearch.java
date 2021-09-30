@@ -69,7 +69,7 @@ public class GraphSearch {
                 }
 
                 //Print a status message every 10000 iteration
-                if (++iterations % 10000 == 0) {
+                if (++iterations % 10 == 0) {
                     printSearchStatus(explored, frontier);
                 }
             }

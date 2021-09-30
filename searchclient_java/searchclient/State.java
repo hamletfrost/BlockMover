@@ -104,6 +104,30 @@ public class State
                     this.agentRows[agent] += action.agentRowDelta;
                     this.agentCols[agent] += action.agentColDelta;
                     break;
+
+                case Push:
+                    this.agentRows[agent] += action.agentRowDelta;
+                    this.agentCols[agent] += action.agentColDelta;
+
+                    // Box is now where the agent was plus the delta
+                    this.boxes[this.agentRows[agent] + action.boxRowDelta][this.agentCols[agent] + action.boxColDelta] = this.boxes[this.agentRows[agent]][this.agentCols[agent]];
+                    
+                    // Box used to be where the agent is now
+                    this.boxes[this.agentRows[agent]][this.agentCols[agent]] = 0;
+                    break;
+
+                case Pull:
+
+
+                    // Box is where agent used to be
+                    this.boxes[this.agentRows[agent]][this.agentCols[agent]] = this.boxes[this.agentRows[agent] - action.boxRowDelta][this.agentCols[agent] - action.boxColDelta];
+
+                    // Box was where the agent used to be minus the delta (TODO is this right? + or - the delta)
+                    this.boxes[this.agentRows[agent] - action.boxRowDelta][this.agentCols[agent] - action.boxColDelta] = 0;
+
+                    this.agentRows[agent] += action.agentRowDelta;
+                    this.agentCols[agent] += action.agentColDelta;
+                    break;
             }
         }
     }
@@ -227,24 +251,24 @@ public class State
                 aDestinationCol = agentCol + action.agentColDelta;
                 bDestinationRow = aDestinationRow + action.boxRowDelta;
                 bDestinationCol = aDestinationCol + action.boxColDelta;
-		box = this.boxes[aDestinationRow][aDestinationCol];
-		if (box == 0) {
-			return false;
-		}
-		boxColor = this.boxColors[(int)box - 65];
+                box = this.boxes[aDestinationRow][aDestinationCol];
+                if (box == 0) {
+                    return false;
+                }
+                boxColor = this.boxColors[(int)box - 65];
                 return (this.cellIsFree(bDestinationRow, bDestinationCol)
-			&& boxColor == agentColor);
+			        && boxColor == agentColor);
 
             case Pull:
                 aDestinationRow = agentRow + action.agentRowDelta;
                 aDestinationCol = agentCol + action.agentColDelta;
                 bDestinationRow = agentRow;
                 bDestinationCol = agentCol;
-		box = this.boxes[agentRow - action.boxRowDelta][agentCol - action.boxColDelta];
-		if (box == 0) {
-			return false;
-		}
-		boxColor = this.boxColors[(int)box - 65];
+                box = this.boxes[agentRow - action.boxRowDelta][agentCol - action.boxColDelta];
+                if (box == 0) {
+                    return false;
+                }
+                boxColor = this.boxColors[(int)box - 65];
                 return (this.cellIsFree(aDestinationRow, aDestinationCol)
                         && boxColor == agentColor);
         }
