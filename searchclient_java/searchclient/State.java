@@ -208,35 +208,38 @@ public class State
         int boxRow;
         int boxCol;
         char box;
-        int destinationRow;
-        int destinationCol;
+        int aDestinationRow;
+        int aDestinationCol;
+        int bDestinationRow;
+        int bDestinationCol;
+
         switch (action.type)
         {
             case NoOp:
                 return true;
 
             case Move:
-                destinationRow = agentRow + action.agentRowDelta;
-                destinationCol = agentCol + action.agentColDelta;
-                return this.cellIsFree(destinationRow, destinationCol);
+                aDestinationRow = agentRow + action.agentRowDelta;
+                aDestinationCol = agentCol + action.agentColDelta;
+                return this.cellIsFree(aDestinationRow, aDestinationCol);
 
-	    case Push:
-		aDestinationRow = agentRow + action.agentRowDelta;
-		aDestinationCol = agentCol + action.agentColDelta;
-		bDestinationRow = boxRow + action.boxRowDelta;
-		bDestinationCol = boxCol + action.boxColDelta;
-		return (this.cellIsFree(bDestinationRow, bDestinationCol)
-				&& aDestinationRow == boxRow
-				&& aDestinationCol == boxCol);
+            case Push:
+                aDestinationRow = agentRow + action.agentRowDelta;
+                aDestinationCol = agentCol + action.agentColDelta;
+                bDestinationRow = boxRow + action.boxRowDelta;
+                bDestinationCol = boxCol + action.boxColDelta;
+                return (this.cellIsFree(bDestinationRow, bDestinationCol)
+                        && aDestinationRow == boxRow
+                        && aDestinationCol == boxCol);
 
-	    case Pull:
-		aDestinationRow = agentRow + action.agentRowDelta;
-		aDestinationCol = agentCol + action.agentColDelta;
-		bDestinationRow = boxRow + action.boxRowDelta;
-		bDestinationCol = boxCol + action.boxColDelta;
-		return (this.cellIsFree(aDestinationRow, aDestinationCol)
-				&& bDestinationRow == agentRow
-				&& bDestinationCol == agentCol);
+            case Pull:
+                aDestinationRow = agentRow + action.agentRowDelta;
+                aDestinationCol = agentCol + action.agentColDelta;
+                bDestinationRow = boxRow + action.boxRowDelta;
+                bDestinationCol = boxCol + action.boxColDelta;
+                return (this.cellIsFree(aDestinationRow, aDestinationCol)
+                        && bDestinationRow == agentRow
+                        && bDestinationCol == agentCol);
         }
 
         // Unreachable:
