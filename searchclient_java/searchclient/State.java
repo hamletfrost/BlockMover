@@ -205,9 +205,8 @@ public class State
         int agentRow = this.agentRows[agent];
         int agentCol = this.agentCols[agent];
         Color agentColor = this.agentColors[agent];
-        int boxRow;
-        int boxCol;
         char box;
+	Color boxColor;
         int aDestinationRow;
         int aDestinationCol;
         int bDestinationRow;
@@ -226,20 +225,28 @@ public class State
             case Push:
                 aDestinationRow = agentRow + action.agentRowDelta;
                 aDestinationCol = agentCol + action.agentColDelta;
-                bDestinationRow = boxRow + action.boxRowDelta;
-                bDestinationCol = boxCol + action.boxColDelta;
+                bDestinationRow = aDestinationRow + action.boxRowDelta;
+                bDestinationCol = aDestinationCol + action.boxColDelta;
+		box = this.boxes[aDestinationRow][aDestinationCol];
+		if (box == 0) {
+			return false;
+		}
+		boxColor = this.boxColors[(int)box - 65];
                 return (this.cellIsFree(bDestinationRow, bDestinationCol)
-                        && aDestinationRow == boxRow
-                        && aDestinationCol == boxCol);
+			&& boxColor == agentColor);
 
             case Pull:
                 aDestinationRow = agentRow + action.agentRowDelta;
                 aDestinationCol = agentCol + action.agentColDelta;
-                bDestinationRow = boxRow + action.boxRowDelta;
-                bDestinationCol = boxCol + action.boxColDelta;
+                bDestinationRow = agentRow;
+                bDestinationCol = agentCol;
+		box = this.boxes[agentRow - action.boxRowDelta][agentCol - action.boxColDelta];
+		if (box == 0) {
+			return false;
+		}
+		boxColor = this.boxColors[(int)box - 65];
                 return (this.cellIsFree(aDestinationRow, aDestinationCol)
-                        && bDestinationRow == agentRow
-                        && bDestinationCol == agentCol);
+                        && boxColor == agentColor);
         }
 
         // Unreachable:
