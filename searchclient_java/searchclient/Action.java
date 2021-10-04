@@ -31,6 +31,7 @@ public enum Action
     MoveE("Move(E)", ActionType.Move, 0, 1, 0, 0),
     MoveW("Move(W)", ActionType.Move, 0, -1, 0, 0),
 
+    // Push actions
     PushNN("Push(N,N)", ActionType.Push, -1, 0, -1, 0),
     PushNW("Push(N,W)", ActionType.Push, -1, 0, 0, -1),
     PushNE("Push(N,E)", ActionType.Push, -1, 0, 0, 1),
@@ -44,6 +45,7 @@ public enum Action
     PushEN("Push(E,N)", ActionType.Push, 0, 1, -1, 0),
     PushES("Push(E,S)", ActionType.Push, 0, 1, 1, 0),
 
+    // Pull actions
     PullNN("Pull(N,N)", ActionType.Pull, -1, 0, -1, 0),
     PullNW("Pull(N,W)", ActionType.Pull, -1, 0, 0, -1),
     PullNE("Pull(N,E)", ActionType.Pull, -1, 0, 0, 1),

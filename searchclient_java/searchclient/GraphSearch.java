@@ -53,6 +53,8 @@ public class GraphSearch {
 
                 // If it is a goal state return it
                 if (cur.isGoalState()) {
+                    System.err.print("FINAL: ");
+                    printSearchStatus(explored, frontier);
                     return cur.extractPlan();
                 }
 
@@ -69,7 +71,7 @@ public class GraphSearch {
                 }
 
                 //Print a status message every 10000 iteration
-                if (++iterations % 10 == 0) {
+                if (++iterations % 10000 == 0) {
                     printSearchStatus(explored, frontier);
                 }
             }
@@ -80,7 +82,7 @@ public class GraphSearch {
 
     private static void printSearchStatus(HashSet<State> explored, Frontier frontier)
     {
-        String statusTemplate = "#Expanded: %,8d, #Frontier: %,8d, #Generated: %,8d, Time: %3.3f s\n%s\n";
+        String statusTemplate = "#Expanded: %,8d, #Frontier: %,8d, #Generated: %,8d, Time: %3.3f s %s\n";
         double elapsedTime = (System.nanoTime() - startTime) / 1_000_000_000d;
         System.err.format(statusTemplate, explored.size(), frontier.size(), explored.size() + frontier.size(),
                           elapsedTime, Memory.stringRep());
