@@ -3,6 +3,7 @@ package searchclient;
 import java.util.ArrayDeque;
 import java.util.HashSet;
 
+
 public interface Frontier
 {
     void add(State state);
@@ -110,6 +111,9 @@ class FrontierBestFirst
 {
     private Heuristic heuristic;
 
+    private final ArrayDeque<State> queue = new ArrayDeque<>(65536);
+    private final HashSet<State> set = new HashSet<>(65536);
+
     public FrontierBestFirst(Heuristic h)
     {
         this.heuristic = h;
@@ -118,31 +122,50 @@ class FrontierBestFirst
     @Override
     public void add(State state)
     {
-        throw new NotImplementedException();
+        this.queue.addLast(state);
+        this.set.add(state);
     }
 
     @Override
     public State pop()
     {
-        throw new NotImplementedException();
+        int best_h = this.heuristic.h(queue.peekFirst());
+        State best = queue.peekFirst();
+
+        for (State cur : set) {
+            if (this.heuristic.h(cur) < best_h) {
+                best_h = this.heuristic.h(cur);
+                best = cur;
+            }
+        }
+
+        this.set.remove(best);
+        this.queue.remove(best);
+
+        return best; 
+        /*
+        State state = this.queue.pollFirst();
+        this.set.remove(state);*/
+        //return state;
+
     }
 
     @Override
     public boolean isEmpty()
     {
-        throw new NotImplementedException();
+        return this.queue.isEmpty();
     }
 
     @Override
     public int size()
     {
-        throw new NotImplementedException();
+        return this.queue.size();
     }
 
     @Override
     public boolean contains(State state)
     {
-        throw new NotImplementedException();
+        return this.set.contains(state);
     }
 
     @Override

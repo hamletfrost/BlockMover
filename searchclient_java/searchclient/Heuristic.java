@@ -12,7 +12,30 @@ public abstract class Heuristic
 
     public int h(State s)
     {
-        throw new NotImplementedException();
+        return 0;
+        /*
+        int goal_count = 0;
+
+        for (int row = 1; row < s.goals.length - 1; row++)
+        {
+            for (int col = 1; col < s.goals[row].length - 1; col++)
+            {
+                char goal = s.goals[row][col];
+
+                if ('A' <= goal && goal <= 'Z' && s.boxes[row][col] != goal)
+                {
+                    goal_count ++;
+                }
+                else if ('0' <= goal && goal <= '9' &&
+                         !(s.agentRows[goal - '0'] == row && s.agentCols[goal - '0'] == col))
+                {
+                    goal_count ++;
+                }
+            }
+        }
+
+
+        return goal_count;*/
     }
 
     public abstract int f(State s);
