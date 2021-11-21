@@ -1,33 +1,20 @@
 #!/bin/bash
 
-levels_bfs=(\
-"../levels/MAPF00.lvl" \
-"../levels/MAPF01.lvl" \
-"../levels/MAPF02.lvl" \
+levels_greedy=(\
 "../levels/MAPF02C.lvl" \
-"../levels/SAD1.lvl" \
-"../levels/SAD2.lvl" \
-"../levels/SAD3.lvl" \
-"../levels/SAfriendofBFS.lvl" \
+"../levels/SAFirefly.lvl" \
 "../levels/SACrunch.lvl" \
-"../levels/SAFirefly.lvl")
-
-levels_dfs=(\
-"../levels/MAPF02C.lvl" \
-"../levels/SAD1.lvl" \
-"../levels/SAD2.lvl" \
-"../levels/SAD3.lvl" \
-"../levels/SAfriendofBFS.lvl" \
-"../levels/SACrunch.lvl" \
-"../levels/SAFirefly.lvl")
+"../levels/SAsoko3_08.lvl" \
+"../levels/SAsoko3_16.lvl" \
+"../levels/SAsoko3_32.lvl")
 
 javac searchclient/SearchClient.java
 
-for lvl in "${levels_bfs[@]}"
+for lvl in "${levels_greedy[@]}"
 do
-  echo BFS Level: $lvl
+  echo Level: $lvl
 
-  java -jar ../server.jar -l $lvl -c "java -Xmx8g searchclient.SearchClient -bfs | grep FINAL" > out.log 2>&1
+  java -jar ../server.jar -l $lvl -c "java -Xmx8g searchclient.SearchClient -greedy | grep FINAL" > out.log 2>&1
 
   grep FINAL: out.log
 
@@ -36,17 +23,5 @@ do
   echo " "
 done
 
-for lvl in "${levels_dfs[@]}"
-do
-  echo DFS Level: $lvl
-
-  java -jar ../server.jar -l $lvl -c "java -Xmx8g searchclient.SearchClient -dfs | grep FINAL" > out.log 2>&1
-
-  grep FINAL: out.log
-
-  grep Found out.log
-
-  echo " "
-done
 
 rm out.log
