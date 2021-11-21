@@ -12,8 +12,7 @@ public abstract class Heuristic
 
     public int h(State s)
     {
-        return 0;
-        /*
+        
         int goal_count = 0;
 
         for (int row = 1; row < s.goals.length - 1; row++)
@@ -35,7 +34,7 @@ public abstract class Heuristic
         }
 
 
-        return goal_count;*/
+        return goal_count;
     }
 
     public abstract int f(State s);
